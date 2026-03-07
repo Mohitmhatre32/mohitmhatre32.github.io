@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@layer base {
+  :root {
+    --background: 30 5% 4%;
+    --foreground: 40 20% 90%;
+
+    --card: 30 5% 7%;
+    --card-foreground: 40 20% 90%;
+
+    --popover: 30 5% 7%;
+    --popover-foreground: 40 20% 90%;
+
+    --primary: 38 90% 55%;
+    --primary-foreground: 30 5% 4%;
+
+    --secondary: 30 8% 12%;
+    --secondary-foreground: 40 20% 85%;
+
+    --muted: 30 5% 14%;
+    --muted-foreground: 30 10% 50%;
+
+    --accent: 25 80% 50%;
+    --accent-foreground: 40 20% 95%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 30 10% 15%;
+    --input: 30 10% 15%;
+    --ring: 38 90% 55%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 30 5% 6%;
+    --sidebar-foreground: 40 20% 85%;
+    --sidebar-primary: 38 90% 55%;
+    --sidebar-primary-foreground: 30 5% 4%;
+    --sidebar-accent: 30 8% 12%;
+    --sidebar-accent-foreground: 40 20% 85%;
+    --sidebar-border: 30 10% 15%;
+    --sidebar-ring: 38 90% 55%;
+
+    /* Custom tokens */
+    --glow-primary: 38 90% 55%;
+    --glow-warm: 25 80% 50%;
+    --glass-bg: 30 5% 8% / 0.6;
+    --glass-border: 38 40% 30% / 0.2;
+    --gradient-forge: linear-gradient(135deg, hsl(30 5% 4%), hsl(30 8% 10%), hsl(38 20% 12%));
+    --gradient-molten: linear-gradient(135deg, hsl(38 90% 55%), hsl(25 80% 50%), hsl(15 70% 45%));
+    --gradient-ember: linear-gradient(180deg, hsl(38 90% 55% / 0.15), transparent);
+    --shadow-glow: 0 0 40px hsl(38 90% 55% / 0.15);
+    --shadow-ember: 0 0 80px hsl(25 80% 50% / 0.1);
+
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    cursor: none !important;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: hsl(38 90% 55% / 0.3);
+    color: hsl(40 20% 95%);
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply relative overflow-hidden rounded-xl;
+    background: hsl(var(--glass-bg));
+    border: 1px solid hsl(var(--glass-border));
+    backdrop-filter: blur(20px);
+  }
+
+  .glass-card::before {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-500;
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), hsl(38 90% 55% / 0.06), transparent 40%);
+  }
+
+  .glass-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px hsl(38 90% 55% / 0.4), 0 0 80px hsl(25 80% 50% / 0.2);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-molten);
+  }
+
+  .magnetic-btn {
+    @apply relative inline-flex items-center justify-center overflow-hidden transition-all duration-300;
+  }
+
+  .magnetic-btn::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: radial-gradient(circle at center, hsl(38 90% 55% / 0.15), transparent);
+  }
+
+  .magnetic-btn:hover::after {
+    @apply opacity-100;
+  }
+
+  .section-reveal {
+    @apply opacity-0 translate-y-8;
+  }
+
+  .terminal-text {
+    font-family: var(--font-mono);
+    @apply text-primary;
+  }
+
+  .ember-border {
+    @apply relative;
+  }
+
+  .ember-border::after {
+    content: '';
+    @apply absolute inset-0 rounded-xl opacity-0 transition-opacity duration-700;
+    background: linear-gradient(135deg, hsl(38 90% 55% / 0.3), transparent 50%, hsl(25 80% 50% / 0.2));
+    z-index: -1;
+    filter: blur(1px);
+  }
+
+  .ember-border:hover::after {
+    @apply opacity-100;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(30 5% 4%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(38 90% 55% / 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 90% 55% / 0.5);
+}
